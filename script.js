@@ -1,24 +1,33 @@
-// functions
-calculateAge(1965);
+// First scoping example
+var a = "Hello!";
+first();
 
-function calculateAge(year) {
-  console.log(2016 - year);
+function first() {
+  var b = "Hi!";
+  second();
+
+  function second() {
+    var c = "Hey!";
+    console.log(a + b + c);
+  }
 }
 
-// retirement(1956);
-var retirement = function (year) {
-  console.log(65 - (2016 - year));
-};
+// Example to show the differece between execution stack and scope chain
+var a = "Hello!";
+first();
 
-// variables
+function first() {
+  var b = "Hi!";
+  second();
 
-console.log(age);
-var age = 23;
-
-function foo() {
-  console.log(age);
-  var age = 65;
-  console.log(age);
+  function second() {
+    var c = "Hey!";
+    third();
+  }
 }
-foo();
-console.log(age);
+
+function third() {
+  var d = "John";
+  //console.log(c);
+  console.log(a + d);
+}
