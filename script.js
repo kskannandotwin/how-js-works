@@ -1,33 +1,32 @@
-// First scoping example
-var a = "Hello!";
-first();
+//console.log(this);
 
-function first() {
-  var b = "Hi!";
-  second();
+calculateAge(1985);
 
-  function second() {
-    var c = "Hey!";
-    console.log(a + b + c);
-  }
+function calculateAge(year) {
+  console.log(2016 - year);
+  console.log(this);
 }
 
-// Example to show the differece between execution stack and scope chain
-var a = "Hello!";
-first();
+var john = {
+  name: "John",
+  yearOfBirth: 1990,
+  calculateAge: function () {
+    console.log(this);
+    console.log(2016 - this.yearOfBirth);
 
-function first() {
-  var b = "Hi!";
-  second();
+    function innerFunction() {
+      console.log(this);
+    }
+    innerFunction();
+  },
+};
 
-  function second() {
-    var c = "Hey!";
-    third();
-  }
-}
+john.calculateAge();
 
-function third() {
-  var d = "John";
-  //console.log(c);
-  console.log(a + d);
-}
+var mike = {
+  name: "Mike",
+  yearOfBirth: 1984,
+};
+
+mike.calculateAge = john.calculateAge;
+mike.calculateAge();
